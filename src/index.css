@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-[#F8FAFC] text-slate-900 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Brand Accents & Enterprise Buttons */
+.accent-glow {
+  box-shadow: 0 0 25px -4px rgba(146, 238, 255, 0.6);
+}
+
+.btn-primary {
+  @apply bg-[#92EEFF] hover:bg-[#70E5FB] text-slate-950 font-semibold px-4 py-2 rounded-lg transition-all duration-150 shadow-sm hover:shadow active:scale-[0.99] flex items-center justify-center gap-2;
+}
+
+.btn-dmart {
+  @apply bg-[#0E8A42] hover:bg-[#0B7236] text-white font-semibold px-4 py-2 rounded-lg transition-all duration-150 shadow-sm active:scale-[0.99] flex items-center justify-center gap-2;
+}
+
+.btn-amazon {
+  @apply bg-[#FF9900] hover:bg-[#E68A00] text-slate-950 font-bold px-4 py-2 rounded-lg transition-all duration-150 shadow-sm active:scale-[0.99] flex items-center justify-center gap-2;
+}
+
+.btn-flipkart {
+  @apply bg-[#2874F0] hover:bg-[#1A61D6] text-white font-semibold px-4 py-2 rounded-lg transition-all duration-150 shadow-sm active:scale-[0.99] flex items-center justify-center gap-2;
+}
+
+
+.btn-outline {
+  @apply border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-medium px-4 py-2 rounded-lg transition-all duration-150 flex items-center justify-center gap-2;
+}
+
+.btn-danger {
+  @apply bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-medium px-3 py-1.5 rounded-lg transition-all duration-150 flex items-center gap-1.5 text-sm;
+}
+
+.btn-success {
+  @apply bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-medium px-3 py-1.5 rounded-lg transition-all duration-150 flex items-center gap-1.5 text-sm;
+}
+
+.card-enterprise {
+  @apply bg-white border border-slate-200/90 rounded-xl p-5 shadow-soft transition-all duration-150 hover:border-slate-300 hover:shadow-elevated;
+}
+
+/* Laser Scanline Beam Animation for HHT RF Scanner */
+@keyframes laserSweep {
+  0% {
+    top: 5%;
+    opacity: 0.8;
+  }
+
+  50% {
+    top: 92%;
+    opacity: 1;
+  }
+
+  100% {
+    top: 5%;
+    opacity: 0.8;
+  }
+}
+
+.animate-laser-sweep {
+  animation: laserSweep 1.8s ease-in-out infinite;
+}
+
+/* Live Pulse Animation */
+@keyframes livePulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.15);
+  }
+}
+
+.animate-live-dot {
+  animation: livePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Thermal Label Print Styling */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #thermal-label-print-area,
+  #thermal-label-print-area * {
+    visibility: visible;
+  }
+
+  #thermal-label-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4in;
+    margin: 0;
+    padding: 0;
+  }
+}
