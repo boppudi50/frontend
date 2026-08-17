@@ -1,5 +1,24 @@
-const hostname = typeof window !== "undefined" && window.location.hostname ? window.location.hostname : "127.0.0.1";
-const API_BASE = `http://${hostname}:8000/api`;
+// Intelligent API_BASE URL resolution:
+// 1. If VITE_API_BASE_URL is set in environment (e.g. on Vercel), use it.
+// 2. Otherwise if running in browser on localhost, default to http://127.0.0.1:8000/api.
+// 3. If running on a deployed domain without env variable, default to the current origin /api.
+const getApiBase = () => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  if (envUrl && envUrl.trim()) {
+    const trimmed = envUrl.trim().replace(/\/+$/, "");
+    return trimmed.endsWith("/api") ? trimmed : `${trimmed}/api`;
+  }
+  if (typeof window !== "undefined" && window.location) {
+    const { hostname, protocol } = window.location;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return `http://${hostname}:8000/api`;
+    }
+    return `${protocol}//${hostname}/api`;
+  }
+  return "http://127.0.0.1:8000/api";
+};
+
+const API_BASE = getApiBase();
 
 export async function request(endpoint, options = {}) {
   const headers = {
